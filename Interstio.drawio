@@ -1,0 +1,174 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:148.0) Gecko/20100101 Firefox/148.0" version="29.6.4">
+  <diagram name="Page-1" id="zs8p-b56xXpT7EGDmP5R">
+    <mxGraphModel dx="1678" dy="926" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="FrontEnd" vertex="1">
+          <mxGeometry height="60" width="110" x="70" y="115" as="geometry" />
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-8" edge="1" parent="1" source="4-_6RTPYrXrzD87ZmaOc-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="4-_6RTPYrXrzD87ZmaOc-27">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="740" y="165" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;div&gt;FastAPI worker&lt;/div&gt;&lt;div&gt;1. POST /make-X/topic&lt;/div&gt;&lt;div&gt;2. GET /make-X/topic/JOB-ID&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="165" x="425" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-3" edge="1" parent="1" source="4-_6RTPYrXrzD87ZmaOc-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.006;entryY=0.353;entryDx=0;entryDy=0;entryPerimeter=0;" target="4-_6RTPYrXrzD87ZmaOc-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-4" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="POST /make-X/topic" vertex="1">
+          <mxGeometry height="30" width="160" x="170" y="115" as="geometry" />
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-9" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Docker Container 1" vertex="1">
+          <mxGeometry height="30" width="115" x="65" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-10" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Docker Container 2" vertex="1">
+          <mxGeometry height="30" width="115" x="450" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-12" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Put job in redis queue" vertex="1">
+          <mxGeometry height="30" width="130" x="600" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-27" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Redis&lt;br&gt;Job Queue &amp;amp; MailBox temp storage" vertex="1">
+          <mxGeometry height="60" width="120" x="750" y="135" as="geometry" />
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-28" edge="1" parent="1" source="4-_6RTPYrXrzD87ZmaOc-27" style="endArrow=classic;html=1;rounded=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;exitX=0;exitY=0.75;exitDx=0;exitDy=0;" target="4-_6RTPYrXrzD87ZmaOc-2" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="790" y="260" as="sourcePoint" />
+            <mxPoint x="840" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-29" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Give back JobId" vertex="1">
+          <mxGeometry height="30" width="60" x="635" y="195" as="geometry" />
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-32" edge="1" parent="1" source="4-_6RTPYrXrzD87ZmaOc-1" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" target="4-_6RTPYrXrzD87ZmaOc-2" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="590" y="270" as="sourcePoint" />
+            <mxPoint x="310" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-33" parent="1" style="text;whiteSpace=wrap;html=1;" value="GET /make-X/topic/JOBID" vertex="1">
+          <mxGeometry height="30" width="190" x="180" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-34" edge="1" parent="1" source="4-_6RTPYrXrzD87ZmaOc-35" style="endArrow=classic;html=1;rounded=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" target="4-_6RTPYrXrzD87ZmaOc-27" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="980" y="160" as="sourcePoint" />
+            <mxPoint x="1000" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-35" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Celery Worker" vertex="1">
+          <mxGeometry height="60" width="120" x="1010" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-36" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Ask if there are jobs in the queue, if there is 1 take and process" vertex="1">
+          <mxGeometry height="110" width="220" x="830" y="65" as="geometry" />
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-37" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Docker Container 3" vertex="1">
+          <mxGeometry height="30" width="115" x="730" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-38" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Docker Container 4" vertex="1">
+          <mxGeometry height="30" width="115" x="1050" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-40" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="SearXNG&lt;br&gt;Search on topic" vertex="1">
+          <mxGeometry height="60" width="120" x="1380" y="135" as="geometry" />
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-41" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Docker Container 5" vertex="1">
+          <mxGeometry height="30" width="115" x="1382.5" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-42" edge="1" parent="1" source="4-_6RTPYrXrzD87ZmaOc-35" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.017;entryY=0.095;entryDx=0;entryDy=0;entryPerimeter=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="1260" y="310" as="sourcePoint" />
+            <mxPoint x="1217.04" y="275.70000000000005" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-43" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Make X Intersting you have access TO MCP" vertex="1">
+          <mxGeometry height="40" width="140" x="1140" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-44" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;entryX=0.336;entryY=1.012;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" target="4-_6RTPYrXrzD87ZmaOc-35" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="1215" y="300" as="sourcePoint" />
+            <mxPoint x="1310" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-45" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="I want to use MCP search for X" vertex="1">
+          <mxGeometry height="40" width="90" x="1075" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-46" edge="1" parent="1" source="4-_6RTPYrXrzD87ZmaOc-35" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" target="4-_6RTPYrXrzD87ZmaOc-40" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="1230" y="290" as="sourcePoint" />
+            <mxPoint x="1280" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-47" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="POST? Search for X" vertex="1">
+          <mxGeometry height="30" width="110" x="1190" y="115" as="geometry" />
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-48" edge="1" parent="1" source="4-_6RTPYrXrzD87ZmaOc-40" style="endArrow=classic;html=1;rounded=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;exitX=-0.002;exitY=0.631;exitDx=0;exitDy=0;exitPerimeter=0;" target="4-_6RTPYrXrzD87ZmaOc-35" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="1230" y="290" as="sourcePoint" />
+            <mxPoint x="1280" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-49" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Result of X" vertex="1">
+          <mxGeometry height="30" width="100" x="1250" y="165" as="geometry" />
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-50" edge="1" parent="1" source="4-_6RTPYrXrzD87ZmaOc-35" style="endArrow=classic;html=1;rounded=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;exitX=0.007;exitY=0.922;exitDx=0;exitDy=0;exitPerimeter=0;" target="4-_6RTPYrXrzD87ZmaOc-27" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="960" y="310" as="sourcePoint" />
+            <mxPoint x="1010" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-51" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Job with ID done here is result" vertex="1">
+          <mxGeometry height="30" width="100" x="910" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-52" edge="1" parent="1" source="4-_6RTPYrXrzD87ZmaOc-2" style="endArrow=classic;html=1;rounded=0;exitX=0.917;exitY=1.032;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.357;entryY=1.011;entryDx=0;entryDy=0;entryPerimeter=0;" target="4-_6RTPYrXrzD87ZmaOc-27" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="680" y="320" />
+            </Array>
+            <mxPoint x="730" y="310" as="sourcePoint" />
+            <mxPoint x="780" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-53" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Ask for the results of the JobId" vertex="1">
+          <mxGeometry height="30" width="60" x="650" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-54" edge="1" parent="1" source="4-_6RTPYrXrzD87ZmaOc-35" style="endArrow=classic;html=1;rounded=0;exitX=0.179;exitY=1.002;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.028;entryY=0.922;entryDx=0;entryDy=0;entryPerimeter=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="1010" y="340" />
+            </Array>
+            <mxPoint x="1130" y="300" as="sourcePoint" />
+            <mxPoint x="1218.3599999999997" y="325.31999999999994" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-55" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Here are the results of X serach" vertex="1">
+          <mxGeometry height="20" width="140" x="1050" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-56" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.104;entryY=1.014;entryDx=0;entryDy=0;entryPerimeter=0;" target="4-_6RTPYrXrzD87ZmaOc-35" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="980" y="430" />
+            </Array>
+            <mxPoint x="1275" y="330" as="sourcePoint" />
+            <mxPoint x="940" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-57" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Okay here is all the info on topic X as JSON" vertex="1">
+          <mxGeometry height="20" width="140" x="1037.5" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-60" parent="1" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" value="AI" vertex="1">
+          <mxGeometry height="80" width="120" x="1200" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-66" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontColor=#FF0000;" value="SlowAPI&lt;br&gt;Rate Limits" vertex="1">
+          <mxGeometry height="30" width="120" x="320" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-67" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontColor=#FF0000;" value="Celery worker concurrency" vertex="1">
+          <mxGeometry height="30" width="145" x="997.5" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="4-_6RTPYrXrzD87ZmaOc-68" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Broker + Result Backend" vertex="1">
+          <mxGeometry height="35" width="95" x="785" y="205" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
