@@ -2,8 +2,8 @@ from fastapi import FastAPI, Request
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
-import redis
 from CeleryWorker.tasks import call_agent
+from CeleryWorker.celery_app import app as celery_app
 
 limiter = Limiter(key_func=get_remote_address)
 app = FastAPI()
@@ -16,16 +16,20 @@ async def root():
 
 @app.post("/makeX/{topic}")
 @limiter.limit("5/minute")
-async def read_item(request: Request):
-    # TODO: use redis to enqueue the job and get the job_id
-    call_agent.add(request.path_params['topic'])
-    
-    # return the job Id
-    return {"item" : 0} 
+async def create_job(request: Request):
+    topic = request.path_params['topic']
+    # Enqueue the Celery job (Redis broker/result backend)
+    result = call_agent.delay(topic)
+    return {"job_id": result.id}
 
 @app.get("/makeX/{topic}/{topic_id}")
 @limiter.limit("30/minute")
-async def read_item(request: Request):
-    #TODO: poll celery to check the status of the job
-    #TODO: If job is done get the result from redis
-    return {"item" : request.path_params['topic']}
+async def get_job(request: Request):
+    topic_id = request.path_params['topic_id']
+    job = celery_app.AsyncResult(topic_id)
+
+    if job.state in {"PENDING", "STARTED"}:
+        return {"state": job.state}
+    if job.state == "FAILURE":
+        return {"state": job.state, "error": str(job.info)}
+    return {"state": job.state, "result": job.result}

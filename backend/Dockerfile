@@ -7,7 +7,7 @@ RUN pip install -r requirements.txt
 COPY . .
 ENV PYTHONPATH=/app
 EXPOSE 5000
-CMD ["fastapi", "run", "API/main.py","--port", "5000"]
+CMD ["uvicorn", "API.main:app", "--host", "0.0.0.0", "--port", "5000"]
 
 
 

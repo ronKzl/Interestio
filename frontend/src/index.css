@@ -1,70 +1,152 @@
 :root {
-  --text: #000000;
-  --text-h: #08060d;
-  --bg: #ffffff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
+  color-scheme: light;
+  --bg0: #ffffff;
+  --bg1: #f6f7ff;
+  --text: #08060d;
+  --muted: rgba(8, 6, 13, 0.68);
+  --border: rgba(8, 6, 13, 0.14);
+  --card-bg: rgba(255, 255, 255, 0.62);
   --accent: #aa3bff;
-  --accent-bg: rgba(255, 255, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  --accent2: #5a5cff;
+  --accent-bg: rgba(170, 59, 255, 0.14);
 }
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-} */
+html[data-theme='dark'] {
+  color-scheme: dark;
+  --bg0: #0b0b12;
+  --bg1: #121324;
+  --text: #f3f4ff;
+  --muted: rgba(243, 244, 255, 0.72);
+  --border: rgba(243, 244, 255, 0.14);
+  --card-bg: rgba(18, 19, 36, 0.62);
+  --accent: #c084fc;
+  --accent2: #7a6bff;
+  --accent-bg: rgba(192, 132, 252, 0.16);
+}
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
+* {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
+  font: 18px/145% system-ui, 'Segoe UI', Roboto, sans-serif;
+  letter-spacing: 0.18px;
+  color: var(--text);
+  background: radial-gradient(900px 700px at 20% 10%, rgba(170, 59, 255, 0.18), transparent 60%),
+    radial-gradient(900px 700px at 80% 0%, rgba(90, 92, 255, 0.14), transparent 55%),
+    linear-gradient(180deg, var(--bg0), var(--bg1));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-#center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+#root {
+  min-height: 100svh;
 }
+
+.page {
+  position: relative;
+  min-height: 100svh;
+  padding: 22px 16px 48px;
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: 980px;
+  margin: 0 auto 26px;
+}
+
+.brand {
+  font-weight: 800;
+  letter-spacing: 0.25px;
+}
+
+.themeToggle {
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-weight: 650;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text);
+  transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.themeToggle:active {
+  transform: scale(0.98);
+}
+
+.hero {
+  max-width: 980px;
+  margin: 0 auto;
+  text-align: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.topicForm {
+  margin-top: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.sentenceText {
+  font-weight: 700;
+  color: var(--text);
+  font-size: clamp(18px, 2.4vw, 28px);
+}
+
+.topicInput {
+  box-sizing: border-box;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text);
+  outline: none;
+  padding: 10px 14px;
+  font: inherit;
+  font-weight: 800;
+  letter-spacing: 0.06px;
+  transition: width 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.topicInput:focus {
+  border-color: color-mix(in srgb, var(--accent) 65%, var(--border));
+  box-shadow: 0 0 0 5px var(--accent-bg);
+}
+
+.topicMeasure {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  visibility: hidden;
+  white-space: pre;
+  padding: 10px 14px;
+  border: 1px solid transparent; /* match input sizing */
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 800;
+  letter-spacing: 0.06px;
+}
+
+@media (max-width: 520px) {
+  body {
+    font-size: 16px;
+  }
+}
+
 

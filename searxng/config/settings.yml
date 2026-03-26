@@ -1,0 +1,21 @@
+use_default_settings: true
+
+server:
+  base_url: "http://localhost:8080/"
+  # SearXNG expects a secret key (commonly provided as a hex string).
+  secret_key: "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+  limiter: true
+  image_proxy: true
+
+redis:
+  url: "redis://redis:6379/0"
+
+ui:
+  default_theme: simple
+  default_locale: ""
+
+search:
+  formats:
+    - html
+    - json
+
