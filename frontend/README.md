@@ -1,73 +1,84 @@
-# React + TypeScript + Vite
+# Frontend (`Allere` / Vite + React)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This folder is the web UI: a React 19 app built with Vite, styled with Tailwind CSS v4, and served in production via Docker + nginx.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## File reference
 
-## React Compiler
+Each project-owned file below is listed with a short description of what it does. Generated folders such as `node_modules/` and `dist/` are omitted.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Root config and tooling
 
-## Expanding the ESLint configuration
+| File | Purpose |
+|------|--------|
+| `package.json` | npm scripts (`dev`, `build`, `lint`, `preview`) and dependency list for the app. |
+| `package-lock.json` | Locked npm dependency tree so installs are reproducible. |
+| `tsconfig.json` | Root TypeScript project references (`tsconfig.app.json` + `tsconfig.node.json`). |
+| `tsconfig.app.json` | Compiler options for application source under `src/`. |
+| `tsconfig.node.json` | Compiler options for Node-only tooling (e.g. `vite.config.ts`). |
+| `vite.config.ts` | Vite configuration: React plugin, Tailwind Vite plugin (`@tailwindcss/vite`). |
+| `eslint.config.js` | ESLint flat config for TypeScript + React + hooks + refresh rules. |
+| `index.html` | HTML shell: mounts the React app on `#root` and loads `src/main.tsx`. |
+| `.gitignore` | Paths Git should ignore (e.g. `node_modules`, build output, env files). |
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Production build and deploy
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+| File | Purpose |
+|------|--------|
+| `Dockerfile` | Multi-stage image: Node builds the app (`npm run build`), nginx serves static `dist/`. |
+| `nginx.conf` | nginx site config for the production container (serving the SPA static files). |
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Application source (`src/`)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+| File | Purpose |
+|------|--------|
+| `main.tsx` | React entry: renders `<App />` into the DOM root in strict mode. |
+| `App.tsx` | Top-level page: header, hero line, and the `PromptInputBox` demo wiring. |
+| `index.css` | Global styles: Tailwind import (`@import "tailwindcss"`), custom scrollbar rules, mobile scrollbar hiding. |
+| `speech-recognition.d.ts` | TypeScript declarations for the Web Speech API (`SpeechRecognition`, events, `window` constructors) where `lib.dom` is incomplete. |
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Utilities (`src/lib/`)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+| File | Purpose |
+|------|--------|
+| `cn.ts` | Small helper to join class name strings (Tailwind-friendly). |
+| `speechRecognition.ts` | Detects `SpeechRecognition` / `webkitSpeechRecognition` and exposes a constructor getter. |
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Prompt UI (`src/components/prompt/`)
+
+| File | Purpose |
+|------|--------|
+| `types.ts` | Shared types: `ToolOption`, `PromptBoxStyles` (style tokens for the prompt box). |
+| `promptBoxStyles.ts` | Default Tailwind class strings for `PromptInputBox` (visual theme in one place). |
+| `PromptIcons.tsx` | Inline SVG icons (gear, microphone, chevron) used by the prompt toolbar. |
+| `ToolsDropdown.tsx` | Gear button + tool label + dropdown menu; keyboard (`Escape`) and click-outside to close. |
+| `MicButton.tsx` | Microphone button using the Web Speech API; appends final transcripts to the textarea. |
+| `PromptInputBox.tsx` | Composes textarea + toolbar (tools on the left, mic on the right); merges default styles with overrides. |
+| `index.ts` | Barrel exports for the prompt module and its public types. |
+
+---
+
+## Roadmap
+
+Planned product direction for this app (not necessarily implemented yet):
+
+1. **Topic research and real-world applications**  
+   Let the user enter or pick a topic, then surface **research results** and **real-world applications** using **videos** and **articles** (search, summaries, and curated links).
+
+2. **Adaptive Q&A from a topic or job posting**  
+   Generate **questions** from a **topic** or pasted **job posting**, then **grade the user’s answers** and provide feedback (score, strengths, gaps).
+
+3. **Feynman-style teaching with AI grading**  
+   Let the user **pick a topic** and **explain it in their own words** (Feynman technique). The **agent evaluates** the explanation, **grades** understanding, and gives **actionable improvement feedback** on **what to study next**.
+
+---
+
+## Local commands
+
+- **Dev server:** `npm run dev`  
+- **Production build:** `npm run build`  
+- **Lint:** `npm run lint`  
+- **Preview production build:** `npm run preview`
+
+After Docker image changes, rebuild the frontend image so the container includes new assets (see project root `docker-compose` workflow).

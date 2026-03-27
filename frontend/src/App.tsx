@@ -1,91 +1,52 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useState } from 'react';
+import { PromptInputBox } from './components/prompt';
+import type { ToolOption } from './components/prompt';
 
-const MAX_TOPIC_WORDS = 25;
-const BRAND = 'Interstio';
+const BRAND = 'Allere';
+
+const DEFAULT_TOOLS: ToolOption[] = [
+  { id: 'makeX', label: 'Make X interesting' },
+  { id: 'summarize', label: 'Feynman technique' },
+  { id: 'questions', label: 'Generate questions' },
+];
 
 export default function App() {
-  const measureRef = useRef<HTMLSpanElement | null>(null);
-  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
-    const saved = typeof window !== 'undefined' ? window.localStorage.getItem('theme') : null;
-    if (saved === 'light' || saved === 'dark') return saved;
-    const prefersDark =
-      typeof window !== 'undefined' && window.matchMedia?.('(prefers-color-scheme: dark)').matches;
-    return prefersDark ? 'dark' : 'light';
-  });
+  const [prompt, setPrompt] = useState('');
+  const [speechError, setSpeechError] = useState<string | null>(null);
+  const sentenceText = 'text-[clamp(14px,4.5vw,28px)] font-bold leading-[1.15]';
 
-  const [topic, setTopic] = useState('');
-  const [inputWidthPx, setInputWidthPx] = useState(220);
-  const placeholder = 'any topic';
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    window.localStorage.setItem('theme', theme);
-  }, [theme]);
-
-  useLayoutEffect(() => {
-    const measureEl = measureRef.current;
-    if (!measureEl) return;
-
-    // Clamp to keep the sentence layout stable on smaller screens.
-    const viewportMax = Math.max(160, Math.min(640, window.innerWidth - 120));
-    const measured = measureEl.offsetWidth;
-    const clamped = Math.max(140, Math.min(measured, viewportMax));
-    setInputWidthPx(clamped);
-  }, [topic, theme]);
-
-  function toggleTheme() {
-    setTheme((t) => (t === 'dark' ? 'light' : 'dark'));
-  }
-
-  function handleTopicChange(next: string) {
-    const tokens = next.trim().split(/\s+/).filter(Boolean);
-    if (tokens.length > MAX_TOPIC_WORDS) {
-      setTopic(tokens.slice(0, MAX_TOPIC_WORDS).join(' '));
-      return;
-    }
-    // Keep `topic` as typed (including intermediate empty states).
-    setTopic(next);
+  function handlePromptChange(next: string) {
+    setSpeechError(null);
+    setPrompt(next);
   }
 
   return (
-    <div className="page">
-      <header className="topbar">
-        <div className="brand" aria-label={BRAND}>
+    <div className="min-h-screen w-full bg-white px-4 pt-6 pb-12 text-black sm:px-6">
+      <header className="relative z-10 mb-7 flex w-full items-center justify-start">
+        <div className="text-xl font-extrabold tracking-wide sm:text-4xl" aria-label={BRAND}>
           {BRAND}
         </div>
-        <button type="button" className="themeToggle" onClick={toggleTheme}>
-          {theme === 'dark' ? 'Dark' : 'Light'} mode
-        </button>
       </header>
 
-      <main className="hero">
-        <form
-          className="topicForm"
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
-        >
-          <span className="sentenceText">Make</span>
+      <main className="mx-auto flex w-full max-w-5xl flex-col items-center gap-10 px-1 sm:px-2">
+        <div className="mt-0 flex w-full max-w-full flex-wrap items-baseline justify-center gap-x-2 gap-y-1.5 sm:gap-x-2.5">
+          <span className={`shrink-0 ${sentenceText}`}>What are we learning today?</span>
+        </div>
 
-          <span className="topicMeasure" ref={measureRef} aria-hidden="true">
-            {topic.length ? topic : placeholder}
-          </span>
-
-          <input
-            className="topicInput"
-            value={topic}
-            onChange={(e) => handleTopicChange(e.target.value)}
-            spellCheck={true}
-            autoComplete="off"
-            inputMode="text"
-            placeholder={placeholder}
-            style={{ width: `${inputWidthPx}px` }}
-            aria-label="Topic"
-            maxLength={MAX_TOPIC_WORDS}
+        <div className="flex w-full max-w-2xl flex-col items-stretch">
+          <PromptInputBox
+            value={prompt}
+            onChange={handlePromptChange}
+            tools={DEFAULT_TOOLS}
+            
+            onSpeechError={setSpeechError}
           />
-
-          <span className="sentenceText">interesting!</span>
-        </form>
+          {speechError ? (
+            <p className="mt-2 text-center text-sm text-red-600" role="status">
+              {speechError}
+            </p>
+          ) : null}
+        </div>
       </main>
     </div>
   );
